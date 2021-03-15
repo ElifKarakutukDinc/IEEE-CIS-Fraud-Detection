@@ -82,26 +82,7 @@ def df_numeric_column_filler_with_aggregated_data(
         return df
 
 
-def calculating_zscore(df, cols):
-    """
-    This function gets a Python Pandas dataframe and calculating z score for column list.
-    :param df: Dataframe to be analyze
-    :param cols: The column list for calculating zscore.
-    :return: Returning Python Pandas dataframe.
-    """
-    try:
-        df_dummy = df.copy()
-        for col in cols:
-            col_zscore = col + "_zscore"
-            df_dummy[col_zscore] = (df_dummy[col] - df_dummy[col].mean()) / df_dummy[
-                col
-            ].std(ddof=0)
 
-        return df_dummy
-
-    except Exception as e:
-        print("Error at df_first_look function: ", str(e))
-        return df
 
     
 def missing_data_finder(df):

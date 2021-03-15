@@ -1,6 +1,8 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 
 
 def df_first_look(df):
@@ -105,7 +107,7 @@ def countplot_viz(
 
     """
     plt.figure(figsize=(12, 5))
-
+    
     sns.countplot(x=xcolumn, data=data, hue=hue, palette=palette)
     plt.xlabel(xlabel, fontsize=fontsize_label)  # seting the xtitle and size
     plt.ylabel(ylabel, fontsize=fontsize_label)  # Seting the ytitle and size
@@ -376,7 +378,41 @@ def distplot_viz(
     plt.ylabel("Density", fontsize=15)
     plt.legend()
 
+def distplot_log_viz(
+    data,
+    column,
+    title1,
+    title2,
+    color1=None,
+    color2=None,
+):
+    """
+    Gets a Python Pandas dataframe and visualize two distplot. One of they is by a column's conditions and other one of they is by gets its log. It shows density of column.
+    :param data: Dataframe to be analyze
+    :param column: This column is for showing data distribution.
+    :param title1: It designates title for graph1.
+    :param title2: It designates title for graph2.
+    :param color1: It designates color for condition_1.
+    :param color2: It designates color for condition_2.
+    :return: This function doesn't return anything.
 
+    """
+    fig, ax = plt.subplots(1, 2, figsize=(18, 4))
+
+    time_val = data[column].values
+
+    sns.distplot(time_val, ax=ax[0], color=color1)
+    ax[0].set_title(title1, fontsize=14)
+    ax[1].set_xlim([min(time_val), max(time_val)])
+
+    sns.distplot(np.log(time_val), ax=ax[1], color=color2)
+    ax[1].set_title(title2, fontsize=14)
+    ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
+
+    plt.show()      
+    
+    
+    
 def correlation_chart(df, column_list):
     """
     This function gets a Python Pandas dataframe and list of columns to visualize correlations among those columns.
