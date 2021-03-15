@@ -88,6 +88,7 @@ def countplot_viz(
     hue=None,
     fontsize_label=16,
     fontsize_title=20,
+    fontsize_text=12,
     rotation=45,
     palette="mako",
 ):
@@ -108,16 +109,24 @@ def countplot_viz(
     """
     plt.figure(figsize=(12, 5))
     
-    sns.countplot(x=xcolumn, data=data, hue=hue, palette=palette)
-    plt.xlabel(xlabel, fontsize=fontsize_label)  # seting the xtitle and size
-    plt.ylabel(ylabel, fontsize=fontsize_label)  # Seting the ytitle and size
-    plt.title(title, fontsize=fontsize_title)
-    plt.xticks(rotation=rotation)
+    g = sns.countplot(x=xcolumn, data=data, hue=hue, palette=palette)
+    g.set_title(title, fontsize=19)
+    g.set_xlabel(xlabel, fontsize=17)
+    g.set_ylabel(ylabel, fontsize=17)
+    g.set_xticklabels(g.get_xticklabels(), rotation=40, ha="right")
+    plt.tight_layout()
+    for p in g.patches:
+        height = p.get_height()
+        g.text(
+            p.get_x() + p.get_width() / 2.0,
+            height + 3,
+            "{:1}".format(height),
+            ha="center",
+            fontsize=fontsize_text,
+        )    
     if hue != None:
-        plt.legend(bbox_to_anchor=(1, 1), loc=1, borderaxespad=0)
-    plt.show()
-
-
+        g.legend(bbox_to_anchor=(1, 1), loc=1, borderaxespad=0)  
+        
 def multiple_plot_viz(
     data,
     column_for_separate,

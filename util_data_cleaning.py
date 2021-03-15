@@ -81,9 +81,6 @@ def df_numeric_column_filler_with_aggregated_data(
         print("Error at df_first_look function: ", str(e))
         return df
 
-
-
-
     
 def missing_data_finder(df):
     """
