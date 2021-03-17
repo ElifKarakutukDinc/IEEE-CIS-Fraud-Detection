@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import warnings 
+warnings.filterwarnings("ignore")
 
 
 def df_first_look(df):
@@ -168,6 +169,69 @@ def multiple_plot_viz(
     ax[1].set_title(title_2)
     x2 = list(range(0, 85, 5))
     ax[1].set_xticks(x2)
+
+def countplot_pointplot_viz(
+    data,
+    filter_list,
+    xcolumn,
+    ycolumn,
+    ycolumn_point,
+    xlabel,
+    ylabel,
+    title,
+    hue=None,
+    fontsize_label=16,
+    fontsize_title=20,
+    fontsize_text=12,
+    rotation=45,
+    palette="mako",
+):
+    """
+    This function gets a Python Pandas dataframe and visualize a countplot and a pointplot.
+    :param data: Dataframe to be analyze
+    :param filter_list: It takes conditions for filtering. 
+    :param xcolumn: This column designates x axis column.
+    :param ycolumn: This column separetes data by its conditions at countplot. 
+    :param ycolumn_point: This column separetes data by its conditions at pointplot. 
+    :param xlabel: It designates name of x axis column.
+    :param ylabel: It designates name of y axis column.
+    :param title: This column designates name of graph.
+    :param hue: Name of variables in `data` or vector data, optional Inputs for plotting long-form data.
+    :param fontsize_label: It designates label size.
+    :param fontsize_title: It designates title size.
+    :param rotation: It designates rotation of graph.
+    :param palette: It designates colors of graph.
+    :return: This function doesn't return anything.
+
+    """    
+    
+    plt.figure(figsize=(12, 5)) 
+    
+    filter_list = filter_list
+    df2 = data[data[ycolumn].isin(filter_list)]
+    order = df2[xcolumn].value_counts().index
+
+    ax1 = sns.countplot(
+        x=xcolumn, hue=ycolumn, data=df2, order=order, hue_order=filter_list, palette=palette
+    )
+    for p in ax1.patches:
+        height = p.get_height()
+        ax1.text(
+            p.get_x() + p.get_width() / 2.0,
+            height + 3,
+            "{:1}".format(height),
+            ha="center",
+            fontsize=fontsize_text,
+        )
+    ax1.set_title(title, fontsize=19)
+    ax1.set_xlabel(xlabel, fontsize=17)
+    ax1.set_ylabel(ylabel, fontsize=17)
+    ax1.set_xticklabels(ax1.get_xticklabels(), rotation=40, ha="right")
+    
+    ax2 = ax1.twinx()
+    sns.pointplot(x=xcolumn, y=ycolumn_point, data=df2, ax=ax2, order=order)
+
+
 
 
 def crosstab_viz(data, index_column_1, index_column_2, aggregated_column, cmap="mako"):
