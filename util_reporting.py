@@ -91,6 +91,8 @@ def countplot_viz(
     fontsize_title=20,
     fontsize_text=12,
     rotation=45,
+    figsize_x=12,
+    figsize_y=5,
     palette="mako",
 ):
     """
@@ -108,7 +110,7 @@ def countplot_viz(
     :return: This function doesn't return anything.
 
     """
-    plt.figure(figsize=(12, 5))
+    plt.figure(figsize=(figsize_x,figsize_y))
     
     g = sns.countplot(x=xcolumn, data=data, hue=hue, palette=palette)
     g.set_title(title, fontsize=19)
