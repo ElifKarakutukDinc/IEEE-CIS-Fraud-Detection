@@ -216,7 +216,7 @@ def countplot_pointplot_viz(
     order = df2[xcolumn].value_counts().index
 
     ax1 = sns.countplot(
-        x=xcolumn, hue=ycolumn, data=df2, order=order, hue_order=filter_list, palette=palette
+        x=xcolumn, hue=ycolumn, data=df2, hue_order=filter_list, palette=palette
     )
     for p in ax1.patches:
         height = p.get_height()
@@ -233,7 +233,7 @@ def countplot_pointplot_viz(
     ax1.set_xticklabels(ax1.get_xticklabels(), rotation=40, ha="right")
     
     ax2 = ax1.twinx()
-    sns.pointplot(x=xcolumn, y=ycolumn_point, data=df2, ax=ax2, order=order)
+    sns.pointplot(x=xcolumn, y=ycolumn_point, data=df2, ax=ax2)
 
 
 
