@@ -186,6 +186,8 @@ def countplot_pointplot_viz(
     fontsize_title=20,
     fontsize_text=12,
     rotation=45,
+    figsize_x=12,
+    figsize_y=5,
     palette="mako",
 ):
     """
@@ -207,7 +209,7 @@ def countplot_pointplot_viz(
 
     """    
     
-    plt.figure(figsize=(12, 5)) 
+    plt.figure(figsize=(figsize_x,figsize_y)) 
     
     filter_list = filter_list
     df2 = data[data[ycolumn].isin(filter_list)]
