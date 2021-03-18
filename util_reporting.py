@@ -374,8 +374,8 @@ def histogram_viz(
     condition_2,
     label1,
     label2,
-    color1=None,
-    color2=None,
+    color1 = None,
+    color2 = None,
 ):
     """
     Gets a Python Pandas dataframe and visualize histogram by a column's conditions.
@@ -396,7 +396,7 @@ def histogram_viz(
         alpha=0.5,
         label=label1,
         color=color1,
-    )
+            )
     plt.hist(
         list(data[data[separate_column] == condition_2][column]),
         alpha=0.5,
@@ -404,6 +404,68 @@ def histogram_viz(
         color=color2,
     )
     plt.legend(loc="upper right")
+    plt.show()
+
+def histogram_multiple_viz(
+    data,
+    column,
+    separate_column,
+    condition_1,
+    condition_2,
+    title1,
+    title2,
+    title3,
+    title4,
+    color1="blue",
+    color2="darkorange",
+):
+    """
+    Gets a Python Pandas dataframe and visualize four histograms by a column's conditions and by gets its log.
+    :param data: Dataframe to be analyze
+    :param column: This column is for showing data distribution.
+    :param separate_column: this colum is for creating histogram by a column's conditions.
+    :param condition_1: It designates condition of separate column.
+    :param condition_2: It designates condition of separate column.
+    :param title1: It designates title by graph1.
+    :param title2: It designates title by graph2.
+    :param title3: It designates title by graph3.
+    :param title4: It designates title by graph4.
+    :param color1: It designates color for condition_1.
+    :param color2: It designates color for condition_2.
+    :return: This function doesn't return anything.
+
+    """    
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 6))
+    data.loc[data[separate_column] == condition_1][column].apply(
+        np.log
+    ).plot(
+        kind="hist",
+        bins=100,
+        title=title1,
+        color=color1,
+        xlim=(-3, 10),
+        ax=ax1,
+    )
+    data.loc[data[separate_column] == condition_2][column].apply(
+        np.log
+    ).plot(
+        kind="hist",
+        bins=100,
+        title=title2,
+        color=color2,
+        xlim=(-3, 10),
+        ax=ax2,
+    )
+    data.loc[data[separate_column] == condition_1][column].plot(
+        kind="hist", bins=100, title=title3, color=color1, ax=ax3
+    )
+    data.loc[data[separate_column] == condition_2][column].plot(
+        kind="hist",
+        bins=100,
+        title=title4,
+        color=color2,
+        ax=ax4,
+    )
     plt.show()
 
 
