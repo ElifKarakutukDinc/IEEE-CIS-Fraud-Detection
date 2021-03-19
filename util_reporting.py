@@ -360,7 +360,7 @@ def boxplot_viz(
     plt.figure(1, figsize=(9, 6))
 
     sns.boxplot(x=xcolumn, data=data, hue=hue, palette=palette)
-    plt.xlabel(xlabel, fontsize=fontsize_label)  # seting the xtitle and size
+    plt.xlabel(xlabel, fontsize=fontsize_label) 
     plt.title(title, fontsize=fontsize_title)
     plt.xticks(rotation=rotation)
     plt.show()
