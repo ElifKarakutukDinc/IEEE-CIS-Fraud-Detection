@@ -9,7 +9,7 @@
    * util_reporting.py: Python file that contains extensive visualisation and reporting functions.
    * util_feature_engineering.py: Python file that contains extensive data preparation and wrangling functions.
 
-* You can glance at my Kaggle kernel to have an idea how i eased the EDA process: 
+* You can glance at my Kaggle kernel to have an idea how i eased the EDA process: https://www.kaggle.com/elifkaraktk/ieee-cis-fraud-detection-eda 
 
 
 
